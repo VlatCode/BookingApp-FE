@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Booking App</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Hostel Booking System</h1>
+        <div class="section_container">
+            <!-- HOSTELS -->
+            <div class="section_header">
+                <h2>Hostels</h2>
+            </div>
+            <div class="buttons_container">
+                <div class="button_area">
+                    <button class="show_all_hostels">Show all Hostels</button>
+                </div>
+                <div class="button_area">
+                    <input type="number" id="hostel_id" placeholder="Enter ID">
+                    <button class="show_one_hostel">Show single Hostel</button>
+                </div>
+                <div class="button_area">
+                    <input type="text" id="hostelName" placeholder="Name">
+                    <input type="number" id="numberOfRooms" placeholder="Number of rooms">
+                    <button class="add_hostel_button">Add Hostel</button>
+                </div>
+                <div class="button_area">
+                    <input type="number" id="hostel_id_remove" placeholder="Enter ID">
+                    <button class="delete_hostel_button">Remove Hostel</button>
+                </div>
+            </div>
+            <div class="hostel_container">
+                <!-- <div class="item">
+                    <h3>This is hostel 1</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque alias voluptatem rerum hic. Saepe, asperiores et perferendis praesentium hic tenetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                </div>
+                <div class="item">
+                    <h3>This is hostel 2</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque alias voluptatem rerum hic. Saepe, asperiores et perferendis praesentium hic tenetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                </div>
+                <div class="item">
+                    <h3>This is hostel 3</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque alias voluptatem rerum hic. Saepe, asperiores et perferendis praesentium hic tenetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                </div> -->
+            </div>
+            <!-- ROOMS -->
+            <div class="section_header">
+                <h2>Rooms</h2>
+            </div>
+            <div class="buttons_container">
+                <div class="button_area">
+                    <button class="show_all_rooms">Show all Rooms</button>
+                </div>
+                <div class="button_area">
+                    <input type="number" id="room_id" placeholder="Enter ID">
+                    <button class="show_one_room">Show single Room</button>                </div>
+                <div class="button_area">
+                    <input type="number" id="roomHostelId" placeholder="Enter Hostel ID">
+                    <button class="add_room_button">Add Room</button>
+                </div>
+                <div class="button_area">
+                    <input type="number" id="room_id_remove" placeholder="Enter ID">
+
+                    <button class="delete_room_button">Remove Room</button>
+                </div>
+            </div>
+            <div class="room_container"></div>
+
+            <!-- RESERVATIONS -->
+            <div class="section_header">
+                <h2>Reservations</h2>
+            </div>
+            <div class="buttons_container">
+                <div class="button_area">
+                    <button class="show_all_reservations">Show all Reservations</button>
+                </div>
+                <div class="button_area">
+                    <input type="number" id="reservation_id" placeholder="Enter ID">
+                    <button class="show_one_reservation">Show single Reservation</button>
+                </div>
+                <div class="button_area">
+                    <!-- UNCOMMENT THESE WHEN IMPLEMENTED -->
+                    <!-- <input type="text" id="resName" placeholder="Name">
+                    <input type="number" id="numOfGuests" placeholder="Number of guests"> -->
+                    <input type="number" id="startDate" placeholder="Start Date">
+                    <input type="number" id="endDate" placeholder="End Date">
+                    <input type="number" id="reservationRoomId" placeholder="Enter Room ID">
+                    <button class="add_reservation_button">Make a Reservation</button>
+                </div>
+                <div class="button_area">
+                    <input type="number" id="reservation_id_remove" placeholder="Enter ID">
+                    <button class="delete_reservation_button">Cancel a Reservation</button>
+                </div>
+            </div>
+            <div class="reservation_container"></div>
+                
+        </div>
+    </div>
+
+
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
