@@ -1,3 +1,226 @@
+// #region LOGIN AREA
+// LOGIN AREA
+
+function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const errorMessageContainer = document.querySelector('.error-message-container');
+
+    const loginInfo = {
+        Username: username,
+        Password: password
+    };
+
+    clearErrorMessage(errorMessageContainer);
+
+    fetch('http://localhost:5261/api/User/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginInfo),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Login failed');
+        }
+        return response.json();
+    })
+    .then(token => {
+        localStorage.setItem('jwtToken', token);
+
+        updateUIForLoggedInState();
+    })
+    .catch(() => {
+        console.error('Login failed: Invalid username or password');
+
+        displayErrorMessage(errorMessageContainer, 'Invalid username or password. Please try again.');
+    });
+}
+
+function displayErrorMessage(container, message) {
+    // Create a new element for the error message
+    const errorMessage = document.createElement('div');
+    errorMessage.classList.add('error-message');
+    errorMessage.style.color = 'red';
+    errorMessage.style.marginTop = '5px'; // Adjusted margin for better spacing
+    errorMessage.textContent = message;
+
+    // Append the error message to the error message container
+    container.appendChild(errorMessage);
+}
+
+function clearErrorMessage(container) {
+    // Remove any existing error messages
+    const existingErrorMessages = container.querySelectorAll('.error-message');
+    existingErrorMessages.forEach(message => {
+        container.removeChild(message);
+    });
+}
+
+function logout() {
+    // Display the logout modal
+    const logoutModal = document.getElementById('logoutModal');
+    logoutModal.style.display = 'block';
+
+    // Handle confirm logout button click
+    const confirmLogoutButton = document.getElementById('confirmLogout');
+    confirmLogoutButton.addEventListener('click', function () {
+        // Close the modal
+        logoutModal.style.display = 'none';
+
+        // Reference to the error message container
+        const errorMessageContainer = document.querySelector('.error-message-container');
+
+        // Clear any existing error messages
+        clearErrorMessage(errorMessageContainer);
+
+        // Remove the token from localStorage
+        localStorage.removeItem('jwtToken');
+
+        // Update the UI for logged-out state
+        updateUIForLoggedOutState();
+    });
+
+    // Handle cancel logout button click
+    const cancelLogoutButton = document.getElementById('cancelLogout');
+    cancelLogoutButton.addEventListener('click', function () {
+        // Close the modal
+        logoutModal.style.display = 'none';
+    });
+}
+
+function updateUIForLoggedInState() {
+    const mainAreaContainer = document.querySelector('.main_area_container');
+    const loginContainer = document.querySelector('.login_container');
+    const logoutButton = document.querySelector('.logout_button');
+
+    if (loginContainer) {
+        loginContainer.style.display = 'none';
+    }
+    if (logoutButton) {
+        logoutButton.style.display = 'inline-block';
+    }
+
+    mainAreaContainer.style.display = 'block';
+}
+
+function updateUIForLoggedOutState() {
+    const mainAreaContainer = document.querySelector('.main_area_container');
+    const loginContainer = document.querySelector('.login_container');
+    const logoutButton = document.querySelector('.logout_button');
+
+    if (loginContainer) {
+        loginContainer.style.display = ''; // Use the default display property
+    }
+    if (logoutButton) {
+        logoutButton.style.display = 'none';
+    }
+
+    mainAreaContainer.style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Check if the user is already logged in
+    const jwtToken = localStorage.getItem('jwtToken');
+    if (jwtToken) {
+        // User is already logged in, update the UI
+        updateUIForLoggedInState();
+    } else {
+        // User is not logged in, update the UI accordingly
+        updateUIForLoggedOutState();
+    }
+});
+
+function togglePasswordVisibility() {
+    const passwordInput = document.getElementById('password');
+    passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+}
+
+const logoutButton = document.querySelector('.logout_button');
+if (logoutButton) {
+    logoutButton.addEventListener('click', logout);
+}
+
+const loginButton = document.querySelector('.login_button');
+if (loginButton) {
+    loginButton.addEventListener('click', login);
+}
+// #endregion
+
+
+
+// #region REGISTER AREA
+function openRegistrationModal() {
+    const registrationModal = document.getElementById('registrationModal');
+    registrationModal.style.display = 'block';
+
+    const confirmRegistrationButton = document.getElementById('confirmRegistration');
+    confirmRegistrationButton.addEventListener('click', function () {
+        const formData = {
+            firstName: document.getElementById('firstName').value,
+            lastName: document.getElementById('lastName').value,
+            dateOfBirth: document.getElementById('dateOfBirth').value,
+            emailAddress: document.getElementById('emailAddress').value,
+            username: document.getElementById('usernameRegister').value,
+            password: document.getElementById('passwordRegister').value
+        };
+
+        fetch('http://localhost:5261/api/User/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Registration failed');
+            }
+            
+            registrationModal.style.display = 'none';
+
+            clearRegistrationFields();
+
+            displaySuccessMessageModal();
+        })
+        .catch(error => console.error('Error registering user:', error));
+    });
+
+    const cancelRegistrationButton = document.getElementById('cancelRegistration');
+    cancelRegistrationButton.addEventListener('click', function () {
+        registrationModal.style.display = 'none';
+
+        clearRegistrationFields();
+    });
+}
+
+function clearRegistrationFields() {
+    document.getElementById('firstName').value = '';
+    document.getElementById('lastName').value = '';
+    document.getElementById('dateOfBirth').value = '';
+    document.getElementById('emailAddress').value = '';
+    document.getElementById('usernameRegister').value = '';
+    document.getElementById('passwordRegister').value = '';
+}
+
+function displaySuccessMessageModal() {
+    const successMessageModal = document.getElementById('successMessageModal');
+    successMessageModal.style.display = 'block';
+
+    const dismissButton = document.getElementById('dismissButton');
+    dismissButton.addEventListener('click', function () {
+        successMessageModal.style.display = 'none';
+
+        window.location.href = 'index.html'; // Change the URL accordingly
+    });
+}
+// #endregion
+
+
+
+// #region MAIN AREA
+// MAIN AREA SECTION
 // HOSTELS
 // SHOW ALL HOSTELS
 const hostelsContainer = document.querySelector(".hostel_container");
@@ -55,7 +278,6 @@ function getHostelById(id) {
 }
 
 showHostelButton.addEventListener('click', function(id) {
-    // console.log(document.getElementById("hostel_id").value);
     getHostelById(document.getElementById("hostel_id").value);
 })
 
@@ -107,7 +329,6 @@ deleteHostelButton.addEventListener('click', function() {
 
 //////////
 // ROOMS
-
 // SHOW ALL ROOMS
 const showAllRooms = document.querySelector(".show_all_rooms");
 const roomContainer = document.querySelector(".room_container");
@@ -162,7 +383,6 @@ function getRoomById(id) {
 }
 
 showRoomButton.addEventListener('click', function() {
-    // console.log(document.getElementById("room_id").value);
     getRoomById(document.getElementById("room_id").value);
 })
 
@@ -212,7 +432,6 @@ deleteRoomButton.addEventListener('click', function() {
 
 //////////
 // RESERVATIONS
-
 // SHOW ALL RESERVATIONS
 const showAllReservations = document.querySelector(".show_all_reservations");
 const reservationContainer = document.querySelector(".reservation_container");
@@ -276,7 +495,6 @@ function getReservationById(id) {
 }
 
 showReservationButton.addEventListener('click', function() {
-    // console.log(document.getElementById("reservation_id").value);
     getReservationById(document.getElementById("reservation_id").value);
 })
 
@@ -333,3 +551,78 @@ function clearInput() {
     numberOfRooms.value = '';
     hostel_id_remove.value = '';
 }
+//#endregion
+
+
+
+// #region SHOW/HIDE ITEMS (FROM DB)
+// SHOW/HIDE ITEMS FUNCTIONS
+// Function to hide the container with the given ID
+function hideContainer(containerId) {
+    const container = document.querySelector(containerId);
+    if (container) {
+        container.style.display = 'none';
+    }
+}
+
+// Function to show the container with the given ID
+function showContainer(containerId) {
+    const container = document.querySelector(containerId);
+    if (container) {
+        container.style.display = 'block';
+    }
+}
+
+// Function to toggle the display of items
+function toggleItemsVisibility(button, containerId) {
+    const buttonText = button.textContent;
+
+    if (buttonText.includes('Show')) {
+        // Show items
+        button.textContent = `Hide items`;
+        button.setAttribute('data-original-text', buttonText); // Store the original text
+        // Call the appropriate function to display items
+        switch (containerId) {
+            case 'hostel_container':
+                getAllHostels();
+                break;
+            case 'room_container':
+                getAllRooms();
+                break;
+            case 'reservation_container':
+                getAllReservations();
+                break;
+            // Add more cases if needed
+        }
+    } else {
+        // Hide items
+        const originalText = button.getAttribute('data-original-text');
+        button.textContent = originalText;
+        hideContainer(`.${containerId}`);
+    }
+}
+
+document.querySelector('.show_all_hostels').addEventListener('click', function () {
+    const containerId = 'hostel_container';
+    toggleItemsVisibility(this, containerId);
+    if (this.textContent.includes('Hide')) {
+        showContainer(`.${containerId}`);
+    }
+});
+
+document.querySelector('.show_all_rooms').addEventListener('click', function () {
+    const containerId = 'room_container';
+    toggleItemsVisibility(this, containerId);
+    if (this.textContent.includes('Hide')) {
+        showContainer(`.${containerId}`);
+    }
+});
+
+document.querySelector('.show_all_reservations').addEventListener('click', function () {
+    const containerId = 'reservation_container';
+    toggleItemsVisibility(this, containerId);
+    if (this.textContent.includes('Hide')) {
+        showContainer(`.${containerId}`);
+    }
+});
+//#endregion
