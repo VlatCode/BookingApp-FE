@@ -1,0 +1,218 @@
+/* LOGIN AREA */
+.login_container {
+    max-width: 300px;
+    margin: auto;
+    margin-bottom: 10vh;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.password-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.password-input {
+    flex: 1;
+}
+
+.view-password-button {
+    margin-left: 10px;
+}
+
+.login_button,
+.show_all_hostels,
+.show_one_hostel,
+.add_hostel_button,
+.delete_hostel_button,
+.show_all_rooms,
+.show_one_room,
+.add_room_button,
+.delete_room_button,
+.show_all_reservations,
+.show_one_reservation,
+.add_reservation_button,
+.delete_reservation_button {
+    width: calc(50% - 5px);
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.login_button {
+    margin-right: 5px;
+    border: 1px solid black;
+}
+
+.logout_button {
+    width: calc(10% - 5px);
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    width: 300px;
+    margin: 20% auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#confirmLogout,
+#cancelLogout {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+#confirmLogout:hover,
+#cancelLogout:hover {
+    background-color: #2980b9;
+}
+
+
+
+/* ///////////////////////// */
+/* REGISTER AREA */
+.register-link {
+    padding: 4px;
+    text-decoration: none;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#registrationModal .modal-content {
+    background-color: #fff;
+    width: fit-content;
+    margin: 10% auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#registrationModal label {
+    display: inline-block;
+    text-align: right;
+    margin-right: 10px;
+}
+
+#registrationModal input {
+    width: 180px;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+#registrationModal .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#registrationModal .register_button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+
+#registrationModal .register_button:hover {
+    background-color: #2980b9;
+}
+
+#successMessageModal .modal-content {
+    background-color: #fff;
+    width: fit-content;
+    margin: 10% auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#successMessageModal label {
+    display: inline-block;
+    text-align: right;
+    margin-right: 10px;
+}
+
+#successMessageModal input {
+    width: 200px;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+#successMessageModal .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#successMessageModal .register_button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3498db; /* Use the same color as in the registration modal */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+
+#successMessageModal .register_button:hover {
+    background-color: #2980b9;
+}

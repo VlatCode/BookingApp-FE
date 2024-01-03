@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" />
-    
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/userAuth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous">
     <title>Booking App</title>
 </head>
 <body>
     <div class="container">
-        <!-- TITLE AREA -->
+        <!-- TITLE -->
         <div class="title_container">
             <h1 class="title">Booking App</h1>
         </div>
 
-        <!-- LOGIN AREA-->
+        <!-- LOGIN AREA -->
         <div class="login_container">
             <label for="username">Username:</label>
             <input type="text" id="username">
@@ -26,16 +26,15 @@
                 <input type="password" id="password" class="password-input">
                 <button type="button" class="view-password-button" onclick="togglePasswordVisibility()">
                     <i class="far fa-eye"></i>
-                  </button>
+                </button>
             </div>
-            <!-- Invalid username or password. Please try again. -->
+            
             <div class="error-message-container"></div>
         
             <button class="login_button">Login</button>
             
-            <!-- Register area-->
             <p>Don't have an account? <button class="register_button" onclick="openRegistrationModal()">Register</button></p>
-            <!-- Registration modal -->
+            
             <div id="registrationModal" class="modal">
                 <div class="modal-content">
                     <h2>Create an account</h2>
@@ -76,36 +75,36 @@
                     <button id="dismissButton" class="register_button">Dismiss</button>
                 </div>
             </div>
-            <!-- End registration modal -->
         </div>
         
-        <button class="logout_button" id="logoutButton" style="display: none;">Sign out</button>
-        
-        <div id="logoutModal" class="modal">
-            <div class="modal-content">
-                <p>Are you sure you want to sign out?</p>
-                <button id="confirmLogout">Yes</button>
-                <button id="cancelLogout">Cancel</button>
+        <!-- PROFILE AREA (LOGGED IN) -->
+        <div class="logged_in_container">
+            
+            <!-- Welcome message gets added here on login -->
+            <button class="logout_button" id="logoutButton" style="display: none;">Sign out</button>
+            <div id="logoutModal" class="modal">
+                <div class="modal-content">
+                    <p>Are you sure you want to sign out?</p>
+                    <button id="confirmLogout">Yes</button>
+                    <button id="cancelLogout">Cancel</button>
+                </div>
             </div>
         </div>
 
         <!-- MAIN AREA -->
         <div class="main_area_container">
-
-            <!-- HOSTELS -->
             <div class="hostels_section">
                 <div class="section_header">
                     <h2>Hostels</h2>
                 </div>
                 <div class="buttons_container">
-                    
                     <div class="button_area">
                         <input type="number" id="hostel_id" placeholder="Enter ID">
                         <button class="show_one_hostel">Show single Hostel</button>
                     </div>
                     <div class="button_area add_hostel_area">
-                        <input type="text" id="hostelName" placeholder="Name">
-                        <input type="number" id="numberOfRooms" placeholder="Number of rooms">
+                        <input type="text" id="addHostelName" placeholder="Name">
+                        <input type="number" id="addNumberOfRooms" placeholder="Number of rooms">
                         <button class="add_hostel_button">Add Hostel</button>
                     </div>
                     <div class="button_area delete_hostel_area">
@@ -119,7 +118,6 @@
                 <div class="hostel_container"></div>
             </div>
             
-            <!-- ROOMS -->
             <div class="rooms_section">
                 <div class="section_header">
                     <h2>Rooms</h2>
@@ -144,7 +142,6 @@
                 <div class="room_container"></div>
             </div>
 
-            <!-- RESERVATIONS -->
             <div class="reservations_section">
                 <div class="section_header">
                     <h2>Reservations</h2>
@@ -155,9 +152,6 @@
                         <button class="show_one_reservation">Show single Reservation</button>
                     </div>
                     <div class="button_area">
-                        <!-- UNCOMMENT THESE WHEN IMPLEMENTED -->
-                        <!-- <input type="text" id="resName" placeholder="Name">
-                        <input type="number" id="numOfGuests" placeholder="Number of guests"> -->
                         <input type="number" id="startDate" placeholder="Start Date">
                         <input type="number" id="endDate" placeholder="End Date">
                         <input type="number" id="reservationRoomId" placeholder="Enter Room ID">
@@ -182,13 +176,14 @@
               <p>Designed by VlatCode</p>
             </footer>
           </div>
-          
     </div>
 
 
-
-
-
-    <script src="script.js"></script>
+    <!-- SCRIPTS -->
+    <script src="scripts/script.js"></script>
+    <script src="scripts/userAuth.js"></script>
+    <script src="scripts/hostels.js"></script>
+    <script src="scripts/rooms.js"></script>
+    <script src="scripts/reservations.js"></script>
 </body>
 </html>
