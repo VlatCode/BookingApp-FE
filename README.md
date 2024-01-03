@@ -4,6 +4,7 @@
 
 This repository is the front-end part of a simple booking application with a few booking features.
 It includes:
+* User register and login functionality
 * Displaying all hostels in the app, all rooms in each hostel & all reservations for each room
 * Displaying each hostel, room & reservation by its unique database ID (SQL), and displaying some information about each
 * Adding a hostel to the booking app, adding a room to any hostel & adding a reservation to any room by inputting parameters
