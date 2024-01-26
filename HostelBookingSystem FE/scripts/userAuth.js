@@ -88,6 +88,19 @@ function setDynamicProfileInfo() {
 
 
 // #region LOGIN AREA
+document.addEventListener('DOMContentLoaded', function () {
+    const jwtToken = localStorage.getItem('jwtToken');
+    const username = localStorage.getItem('username');
+
+    if (jwtToken && username) {
+        appendWelcomeMessage(username);
+        updateUIForLoggedInState();
+        setDynamicProfileInfo();
+    } else {
+        updateUIForLoggedOutState();
+    }
+});
+
 function login() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
@@ -107,12 +120,7 @@ function login() {
         },
         body: JSON.stringify(loginInfo),
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Login failed');
-        }
-        return response.json();
-    })
+    .then(response => response.json())
     .then(token => {
         localStorage.setItem('jwtToken', token);
         localStorage.setItem('username', username);
@@ -120,58 +128,11 @@ function login() {
         appendWelcomeMessage(username);
         updateUIForLoggedInState();
         setDynamicProfileInfo();
-        console.log('Login successful. Setting dynamic profile info for user:', username);
+        console.log('Login successful.');
     })
     .catch(() => {
         console.error('Login failed: Invalid username or password');
         displayErrorMessage(errorMessageContainer, 'Invalid username or password. Please try again.');
-    });
-}
-
-function clearWelcomeMessages() {
-    const existingWelcomeMessages = document.querySelectorAll('.welcome-message');
-    existingWelcomeMessages.forEach(message => {
-        message.parentNode.removeChild(message);
-    });
-}
-
-function appendWelcomeMessage(username) {
-    const welcomeMessage = document.createElement('p');
-    welcomeMessage.classList.add('welcome-message');
-
-    // Create a clickable link with target="_blank" around the username
-    const profileLink = document.createElement('a');
-    profileLink.href = 'profile.html';  // Set the actual URL for the profile page
-    profileLink.textContent = username;
-    profileLink.target = '_blank';  // Open link in a new tab
-
-    welcomeMessage.appendChild(document.createTextNode('User: '));
-    welcomeMessage.appendChild(profileLink);
-
-    const loggedInContainer = document.querySelector('.logged_in_container');
-    const logoutButton = document.getElementById('logoutButton');
-    if (loggedInContainer) {
-        loggedInContainer.insertBefore(welcomeMessage, logoutButton);
-    }
-}
-
-function displayErrorMessage(container, message) {
-    // Create a new element for the error message
-    const errorMessage = document.createElement('div');
-    errorMessage.classList.add('error-message');
-    errorMessage.style.color = 'red';
-    errorMessage.style.marginTop = '5px'; // Adjusted margin for better spacing
-    errorMessage.textContent = message;
-
-    // Append the error message to the error message container
-    container.appendChild(errorMessage);
-}
-
-function clearErrorMessage(container) {
-    // Remove any existing error messages
-    const existingErrorMessages = container.querySelectorAll('.error-message');
-    existingErrorMessages.forEach(message => {
-        container.removeChild(message);
     });
 }
 
@@ -187,17 +148,82 @@ function logout() {
         clearErrorMessage(errorMessageContainer);
         clearWelcomeMessages();
 
-        // Reset input fields
         document.getElementById('username').value = '';
         document.getElementById('password').value = '';
 
-        localStorage.removeItem('jwtToken');
-        updateUIForLoggedOutState();
+        fetch('http://localhost:5261/api/User/logout', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('jwtToken'),
+            },
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Logout failed');
+                }
+                return response.text();
+            })
+            .then(data => {
+                console.log(data);
+                localStorage.removeItem('jwtToken');
+                updateUIForLoggedOutState();
+            })
+            .catch(error => {
+                console.error('Logout failed:', error);
+            });
     });
 
     const cancelLogoutButton = document.getElementById('cancelLogout');
     cancelLogoutButton.addEventListener('click', function () {
         logoutModal.style.display = 'none';
+    });
+}
+
+function togglePasswordVisibility() {
+    const passwordInput = document.getElementById('password');
+    passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+}
+
+function clearWelcomeMessages() {
+    const existingWelcomeMessages = document.querySelectorAll('.welcome-message');
+    existingWelcomeMessages.forEach(message => {
+        message.parentNode.removeChild(message);
+    });
+}
+
+function appendWelcomeMessage(username) {
+    const welcomeMessage = document.createElement('p');
+    welcomeMessage.classList.add('welcome-message');
+
+    const profileLink = document.createElement('a');
+    profileLink.href = 'profile.html';
+    profileLink.textContent = username;
+    profileLink.target = '_blank';
+
+    welcomeMessage.appendChild(document.createTextNode('Welcome, '));
+    welcomeMessage.appendChild(profileLink);
+
+    const loggedInContainer = document.querySelector('.logged_in_container');
+    const logoutButton = document.getElementById('logoutButton');
+    if (loggedInContainer) {
+        loggedInContainer.insertBefore(welcomeMessage, logoutButton);
+    }
+}
+
+function displayErrorMessage(container, message) {
+    const errorMessage = document.createElement('div');
+    errorMessage.classList.add('error-message');
+    errorMessage.style.color = 'red';
+    errorMessage.style.marginTop = '5px';
+    errorMessage.textContent = message;
+
+    container.appendChild(errorMessage);
+}
+
+function clearErrorMessage(container) {
+    const existingErrorMessages = container.querySelectorAll('.error-message');
+    existingErrorMessages.forEach(message => {
+        container.removeChild(message);
     });
 }
 
@@ -224,7 +250,7 @@ function updateUIForLoggedOutState() {
     const logoutButton = document.querySelector('.logout_button');
 
     if (loginContainer) {
-        loginContainer.style.display = ''; // Use the default display property
+        loginContainer.style.display = '';
     }
     if (logoutButton) {
         logoutButton.style.display = 'none';
@@ -233,27 +259,6 @@ function updateUIForLoggedOutState() {
     if (mainAreaContainer) {
         mainAreaContainer.style.display = 'none';
     }
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Check if the user is already logged in
-    const jwtToken = localStorage.getItem('jwtToken');
-    const username = localStorage.getItem('username');
-
-    if (jwtToken && username) {
-        // User is already logged in, update the UI
-        appendWelcomeMessage(username);
-        updateUIForLoggedInState();
-        setDynamicProfileInfo();
-    } else {
-        // User is not logged in, update the UI accordingly
-        updateUIForLoggedOutState();
-    }
-});
-
-function togglePasswordVisibility() {
-    const passwordInput = document.getElementById('password');
-    passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
 }
 
 const logoutButton = document.querySelector('.logout_button');
