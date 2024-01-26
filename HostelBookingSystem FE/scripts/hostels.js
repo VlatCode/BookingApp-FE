@@ -1,11 +1,9 @@
-// HOSTELS
-// SHOW ALL HOSTELS
+// #region SHOW ALL HOSTELS
 const hostelsContainer = document.querySelector(".hostel_container");
 
 const showAllHostels = document.querySelector(".show_all_hostels");
 
 function displayHostels(hostels) {
-    // Append allHostels to hostelContainer
     let allHostels = '';
 
     hostels.forEach(hostel => {
@@ -30,21 +28,21 @@ function getAllHostels() {
 showAllHostels.addEventListener('click', function() {
     getAllHostels();
 })
+// #endregion
 
-// SHOW HOSTEL BY ID
+
+// #region SHOW HOSTEL BY ID
 const showHostelButton = document.querySelector(".show_one_hostel");
 
 function displayHostel(hostel) {
     if (hostel) {
-        hostelName.value = hostel.name;
-        numberOfRooms.value = hostel.numberOfRooms;
-
         const hostelElement = `
             <div class="item">
                 <h3>${hostel.name}</h3>
                 <p>Number of rooms: ${hostel.numberOfRooms}</p>
             </div>
         `;
+        
         hostelsContainer.innerHTML = hostelElement;
     } else {
         hostelsContainer.innerHTML = "Hostel not found";
@@ -54,7 +52,10 @@ function displayHostel(hostel) {
 function getHostelById(id) {
     fetch(`http://localhost:5261/api/Hostel/${id}`)
         .then(data => data.json())
-        .then(response => displayHostel(response))
+        .then(response => {
+            displayHostel(response);
+        }
+            )
         .catch(error => {
             console.error("Error fetching hostel:", error);
             hostelsContainer.innerHTML = "Error fetching hostel. Please try again.";
@@ -70,8 +71,10 @@ showHostelButton.addEventListener('click', function () {
         hostelsContainer.innerHTML = "Please enter a valid hostel ID.";
     }
 });
+// #endregion
 
-// ADD HOSTEL
+
+// #region ADD HOSTEL
 const addHostelButton = document.querySelector(".add_hostel_button");
 const addHostelName = document.querySelector("#addHostelName");
 const addNumberOfRooms = document.querySelector("#addNumberOfRooms");
@@ -96,8 +99,10 @@ function addHostel(name, numberOfRooms) {
 addHostelButton.addEventListener('click', function() {
     addHostel(addHostelName.value, addNumberOfRooms.value);
 })
+// #endregion
 
-// DELETE HOSTEL
+
+// #region DELETE HOSTEL
 const deleteHostelButton = document.querySelector(".delete_hostel_button");
 
 function deleteHostel(id) {
@@ -116,3 +121,4 @@ deleteHostelButton.addEventListener('click', function() {
     var hostelId = document.getElementById("hostel_id_remove").value;
     deleteHostel(hostelId);
 })
+// #endregion

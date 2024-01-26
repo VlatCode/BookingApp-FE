@@ -1,11 +1,8 @@
-//////////
-// ROOMS
-// SHOW ALL ROOMS
+// #region SHOW ALL ROOMS
 const showAllRooms = document.querySelector(".show_all_rooms");
 const roomContainer = document.querySelector(".room_container");
 
 function displayRooms(rooms) {
-    // Append allRooms to roomContainer
     let allRooms = '';
 
     rooms.forEach(room => {
@@ -30,8 +27,10 @@ function getAllRooms() {
 showAllRooms.addEventListener('click', function() {
     getAllRooms();
 })
+// #endregion
 
-// SHOW ROOM BY ID
+
+// #region SHOW ROOM BY ID
 const showRoomButton = document.querySelector(".show_one_room");
 
 function displayRoom(room) {
@@ -69,9 +68,10 @@ showRoomButton.addEventListener('click', function() {
         roomContainer.innerHTML = "Please enter a valid room ID.";
     }
 });
+// #endregion
 
 
-// ADD ROOM
+// #region ADD ROOM
 const addRoomButton = document.querySelector(".add_room_button");
 const roomHostelId = document.querySelector("#roomHostelId");
 
@@ -93,8 +93,10 @@ function addRoom(roomHostelId) {
 addRoomButton.addEventListener('click', function() {
     addRoom(roomHostelId.value);
 })
+// #endregion
 
-// DELETE ROOM
+
+// #region DELETE ROOM
 const deleteRoomButton = document.querySelector(".delete_room_button");
 
 function deleteRoom(id) {
@@ -113,3 +115,4 @@ deleteRoomButton.addEventListener('click', function() {
     var roomId = document.getElementById("room_id_remove").value;
     deleteRoom(roomId);
 })
+// #endregion

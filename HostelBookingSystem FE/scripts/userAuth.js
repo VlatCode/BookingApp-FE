@@ -87,7 +87,7 @@ function setDynamicProfileInfo() {
 // #endregion
 
 
-// #region LOGIN AREA
+// #region LOGIN & LOGOUT AREA
 document.addEventListener('DOMContentLoaded', function () {
     const jwtToken = localStorage.getItem('jwtToken');
     const username = localStorage.getItem('username');

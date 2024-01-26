@@ -1,6 +1,4 @@
-//////////
-// RESERVATIONS
-// SHOW ALL RESERVATIONS
+// #region SHOW ALL RESERVATIONS
 const showAllReservations = document.querySelector(".show_all_reservations");
 const reservationContainer = document.querySelector(".reservation_container");
 
@@ -35,8 +33,10 @@ function getAllReservations() {
 showAllReservations.addEventListener('click', function() {
     getAllReservations();
 })
+// #endregion
 
-// SHOW RESERVATION BY ID
+
+// #region SHOW RESERVATION BY ID
 const showReservationButton = document.querySelector(".show_one_reservation");
 
 function displayReservation(reservation) {
@@ -71,9 +71,10 @@ showReservationButton.addEventListener('click', function() {
         reservationContainer.innerHTML = "Please enter a valid reservation ID.";
     }
 });
+// #endregion
 
 
-// ADD RESERVATION
+// #region ADD RESERVATION
 const addReservationButton = document.querySelector(".add_reservation_button");
 const startDate = document.querySelector("#startDate");
 const endDate = document.querySelector("#endDate");
@@ -99,8 +100,10 @@ function addReservation(startDate, endDate, reservationRoomId) {
 addReservationButton.addEventListener('click', function() {
     addReservation(startDate.value, endDate.value, reservationRoomId.value);
 })
+// #endregion
 
-// DELETE RESERVATION
+
+// #region DELETE RESERVATION
 const deleteReservationBtn = document.querySelector(".delete_reservation_button");
 
 function deleteReservation(id) {
@@ -119,3 +122,4 @@ deleteReservationBtn.addEventListener('click', function() {
     var reservationId = document.getElementById("reservation_id_remove").value;
     deleteReservation(reservationId);
 })
+// #endregion
