@@ -1,0 +1,328 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 85%;
+    margin: auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+
+/* ///////////////////////// */
+/* TITLE AREA */
+.title_container {
+    background-color: #3498db;
+    margin-bottom: 50px;
+    padding: 30px;
+    text-align: center;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.title {
+    margin: 0;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 4em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+
+/* ///////////////////////// */
+/* LOGIN AREA */
+.login_container {
+    max-width: 300px;
+    margin: auto;
+    margin-bottom: 10vh;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.password-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.password-input {
+    flex: 1;
+}
+
+.view-password-button {
+    margin-left: 10px;
+}
+
+.login_button,
+.show_all_hostels,
+.show_one_hostel,
+.add_hostel_button,
+.delete_hostel_button,
+.show_all_rooms,
+.show_one_room,
+.add_room_button,
+.delete_room_button,
+.show_all_reservations,
+.show_one_reservation,
+.add_reservation_button,
+.delete_reservation_button {
+    width: calc(50% - 5px);
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.login_button {
+    margin-right: 5px;
+    border: 1px solid black;
+}
+
+.logout_button {
+    width: calc(10% - 5px);
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    width: 300px;
+    margin: 20% auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#confirmLogout,
+#cancelLogout {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+#confirmLogout:hover,
+#cancelLogout:hover {
+    background-color: #2980b9;
+}
+
+
+
+/* ///////////////////////// */
+/* REGISTER AREA */
+.register-link {
+    padding: 4px;
+    text-decoration: none;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#registrationModal .modal-content {
+    background-color: #fff;
+    width: fit-content;
+    margin: 10% auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#registrationModal label {
+    display: inline-block;
+    text-align: right;
+    margin-right: 10px;
+}
+
+#registrationModal input {
+    width: 180px;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+#registrationModal .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#registrationModal .register_button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+#registrationModal .register_button:hover {
+    background-color: #2980b9;
+}
+
+#successMessageModal .modal-content {
+    background-color: #fff;
+    width: fit-content;
+    margin: 10% auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#successMessageModal label {
+    display: inline-block;
+    text-align: right;
+    margin-right: 10px;
+}
+
+#successMessageModal input {
+    width: 200px;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+#successMessageModal .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#successMessageModal .register_button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3498db; /* Use the same color as in the registration modal */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+#successMessageModal .register_button:hover {
+    background-color: #2980b9;
+}
+
+
+
+
+/* ///////////////////////// */
+/* MAIN AREA */
+.buttons_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.button_area {
+    width: 48%; /* Adjust the width as needed */
+    margin-bottom: 10px;
+}
+
+.full-width {
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.main_area_container {
+    margin-top: 20px;
+}
+
+/* Styles for the sections */
+
+.section_header {
+    background-color: #0b3f7a93;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 15px;
+}
+
+.hostels_section,
+.rooms_section,
+.reservations_section {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.hostel_container,
+.room_container,
+.reservation_container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.item {
+    flex: 0 0 48%;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
