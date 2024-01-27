@@ -78,7 +78,7 @@ function setDynamicProfileInfo() {
 
         // Set dynamic image source based on the logged-in user
         if (username === 'vnikolovski97') {
-            profilePicture.src = './Visa_2023.jpg'; // Set the actual path for the image
+            profilePicture.src = 'assets/Visa_2023.jpg'; // Set the actual path for the image
         } else {
             profilePicture.src = './default-profile-picture.jpg'; // Set a default image path
         }
