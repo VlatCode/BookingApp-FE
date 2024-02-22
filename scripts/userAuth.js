@@ -6,15 +6,16 @@ function openRegistrationModal() {
     const confirmRegistrationButton = document.getElementById('confirmRegistration');
     confirmRegistrationButton.addEventListener('click', function () {
         const formData = {
+            username: document.getElementById('usernameRegister').value,
+            password: document.getElementById('passwordRegister').value,
+            confirmPassword: document.getElementById('confirmPasswordRegister').value, // Add confirmPassword field
             firstName: document.getElementById('firstName').value,
             lastName: document.getElementById('lastName').value,
             dateOfBirth: document.getElementById('dateOfBirth').value,
-            emailAddress: document.getElementById('emailAddress').value,
-            username: document.getElementById('usernameRegister').value,
-            password: document.getElementById('passwordRegister').value
+            emailAddress: document.getElementById('emailAddress').value
         };
 
-        fetch('http://localhost:5261/api/User/register', {
+        fetch('http://localhost:5261/api/Users/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,6 +51,7 @@ function clearRegistrationFields() {
     document.getElementById('emailAddress').value = '';
     document.getElementById('usernameRegister').value = '';
     document.getElementById('passwordRegister').value = '';
+    document.getElementById('confirmPasswordRegister').value = ''; // Clear confirmPassword field
 }
 
 function displaySuccessMessageModal() {
@@ -63,6 +65,7 @@ function displaySuccessMessageModal() {
         window.location.href = 'index.html'; // Change the URL accordingly
     });
 }
+
 // #endregion
 
 
@@ -113,15 +116,22 @@ function login() {
 
     clearErrorMessage(errorMessageContainer);
 
-    fetch('http://localhost:5261/api/User/login', {
+    fetch('http://localhost:5261/api/Users/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(loginInfo),
     })
-    .then(response => response.json())
-    .then(token => {
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Login failed: Invalid username or password');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Assuming the token is received as part of the response data
+        const token = data.jwtToken;
         localStorage.setItem('jwtToken', token);
         localStorage.setItem('username', username);
         clearWelcomeMessages();
@@ -130,8 +140,8 @@ function login() {
         setDynamicProfileInfo();
         console.log('Login successful.');
     })
-    .catch(() => {
-        console.error('Login failed: Invalid username or password');
+    .catch(error => {
+        console.error('Login failed:', error.message);
         displayErrorMessage(errorMessageContainer, 'Invalid username or password. Please try again.');
     });
 }
@@ -151,26 +161,26 @@ function logout() {
         document.getElementById('username').value = '';
         document.getElementById('password').value = '';
 
-        fetch('http://localhost:5261/api/User/logout', {
+        fetch('http://localhost:5261/api/Users/logout', {  // Change the endpoint URL here
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('jwtToken'),
             },
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Logout failed');
-                }
-                return response.text();
-            })
-            .then(data => {
-                console.log(data);
-                localStorage.removeItem('jwtToken');
-                updateUIForLoggedOutState();
-            })
-            .catch(error => {
-                console.error('Logout failed:', error);
-            });
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Logout failed');
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log(data);
+            localStorage.removeItem('jwtToken');
+            updateUIForLoggedOutState();
+        })
+        .catch(error => {
+            console.error('Logout failed:', error);
+        });
     });
 
     const cancelLogoutButton = document.getElementById('cancelLogout');
