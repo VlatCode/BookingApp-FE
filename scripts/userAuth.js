@@ -15,7 +15,7 @@ function openRegistrationModal() {
             emailAddress: document.getElementById('emailAddress').value
         };
 
-        fetch('http://localhost:5261/api/Users/register', {
+        fetch('http://localhost:5261/api/User/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ function login() {
 
     clearErrorMessage(errorMessageContainer);
 
-    fetch('http://localhost:5261/api/Users/login', {
+    fetch('http://localhost:5261/api/User/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -161,7 +161,7 @@ function logout() {
         document.getElementById('username').value = '';
         document.getElementById('password').value = '';
 
-        fetch('http://localhost:5261/api/Users/logout', {  // Change the endpoint URL here
+        fetch('http://localhost:5261/api/User/logout', {  // Change the endpoint URL here
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('jwtToken'),
